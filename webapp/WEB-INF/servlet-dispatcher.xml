@@ -10,9 +10,9 @@
            				http://www.springframework.org/schema/context
            				http://www.springframework.org/schema/context/spring-context-3.1.xsd">
 
-    <mvc:annotation-driven></mvc:annotation-driven><!-- enable WebMVC -->
-	<context:annotation-config/><!-- Activates various annotations; e.g. @Autowired -->
-	
+    <mvc:annotation-driven></mvc:annotation-driven> <!-- enable WebMVC -->
+    <context:annotation-config/> <!-- activates various annotations; e.g. @Autowired -->
+		
     <bean id="ServletController" class="org.my.controllers.ServletController"></bean>
 
 </beans>
