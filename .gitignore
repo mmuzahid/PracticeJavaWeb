@@ -2,6 +2,6 @@
 /.settings/.*
 /target/
 /target/.*
-/\.classpath
-/\.project
+.classpath
+.project
 /build/
