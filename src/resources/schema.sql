@@ -1,0 +1,9 @@
+CREATE DATABASE practicejavaweb;
+
+CREATE TABLE `post` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	`title` VARCHAR(50) NOT NULL,
+	`content` TEXT NOT NULL,
+	`created_at` DATETIME NOT NULL
+)
+ENGINE=InnoDB;
