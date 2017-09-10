@@ -1,5 +1,8 @@
 package org.my.controllers;
 
+import java.util.Date;
+
+import org.my.models.Post;
 import org.my.services.RootService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,6 +19,17 @@ public class ServletController {
 	@ResponseBody
 	public String servletaction() {
 	    return "ServletController Response! service data: " + rootService.getData();
+	}
+	
+	@RequestMapping(value= "/createpost", method = RequestMethod.GET)
+	@ResponseBody
+	public String createPost() {
+		Post post = new Post();
+		post.setTitle("Test Title");
+		post.setContent("Test Content");
+		post.setCreatedAt(new Date());
+		rootService.savePost(post);
+	    return "saved post id: " + post.getId();
 	}
 	
 }
