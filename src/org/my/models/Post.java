@@ -1,12 +1,17 @@
 package org.my.models;
 
 import java.util.Date;
+import java.util.Set;
+import java.util.TreeSet;
 
 public class Post {
 	private Long id;
 	private String title;
 	private String content;
 	private Date createdAt;
+	
+	private Set<Tag> tags = new TreeSet<Tag>();
+	
 	public Long getId() {
 		return id;
 	}
@@ -30,6 +35,12 @@ public class Post {
 	}
 	public void setCreatedAt(Date createdAt) {
 		this.createdAt = createdAt;
+	}
+	public Set<Tag> getTags() {
+		return tags;
+	}
+	public void setTags(Set<Tag> tags) {
+		this.tags = tags;
 	}
 
 }

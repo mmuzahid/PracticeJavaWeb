@@ -11,5 +11,11 @@
 		<property name="title" column="title" />
 		<property name="content" column="content" />
 		<property name="createdAt" column="created_at" />
+		<set name="tags" table="tag" cascade="all-delete-orphan"  inverse="false" >
+	        <key>
+	            <column name="post_id" not-null="true" />
+	        </key>
+	        <one-to-many class="org.my.models.Tag" />
+	    </set>
 	</class>
 </hibernate-mapping>

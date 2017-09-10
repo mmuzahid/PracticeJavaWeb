@@ -20,6 +20,7 @@
 		<property name="mappingResources">
 			<list>
 				<value>resources/Post.hbm.xml</value>				
+				<value>resources/Tag.hbm.xml</value>				
 			</list>
 		</property>
 		<property name="hibernateProperties">
@@ -37,10 +38,12 @@
 				<prop key="hibernate.connection.zeroDateTimeBehavior">convertToNull</prop>
 				<!-- Drop and re-create the database schema on startup -->
 				<prop key="hbm2ddl.auto">update</prop>
-				<prop key="hibernate.jdbc.batch_size">${HIBERNATE_BATCH_SIZE}</prop>
+				<prop key="hibernate.jdbc.batch_size">100</prop>
 				<prop key="hibernate.order_inserts">true</prop>
 				<prop key="hibernate.order_updates">true</prop>
 				<prop key="hibernate.cache.use_second_level_cache false">false</prop>
+				<prop key="hibernate.show_sql">true</prop>
+				
 			</props>
 		</property>
 	</bean>

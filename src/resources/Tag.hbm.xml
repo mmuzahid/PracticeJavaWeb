@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="org.my.models.Tag" table="tag">
+		<id name="recordId" type="java.lang.Integer">
+            <column name="RECORD_ID" />
+            <generator class="identity" />
+        </id>
+		<many-to-one name="post" class="org.my.models.Post">
+			<column name="post_id" not-null="true"></column>
+		</many-to-one>
+		<property name="tagName" column="tag_name" />
+		
+	</class>
+</hibernate-mapping>

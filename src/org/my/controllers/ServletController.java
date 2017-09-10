@@ -3,6 +3,7 @@ package org.my.controllers;
 import java.util.Date;
 
 import org.my.models.Post;
+import org.my.models.Tag;
 import org.my.services.RootService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,9 +26,28 @@ public class ServletController {
 	@ResponseBody
 	public String createPost() {
 		Post post = new Post();
-		post.setTitle("Test Title");
-		post.setContent("Test Content");
+		// for update uncomment this: post.setId(32l);
+		post.setTitle("Test Title2");
+		post.setContent("Test Content2");
 		post.setCreatedAt(new Date());
+		
+		Tag tag = new Tag();
+		tag.setPost(post);
+		tag.setTagName("JAVA100");
+		
+		Tag ctag = new Tag();
+		ctag.setPost(post);
+		ctag.setTagName("C100");
+		
+		Tag ptag = new Tag();
+		ptag.setPost(post);
+		ptag.setTagName("PYTHON100");
+		
+		
+		post.getTags().add(tag);
+		post.getTags().add(ctag);
+		post.getTags().add(ptag);
+				
 		rootService.savePost(post);
 	    return "saved post id: " + post.getId();
 	}

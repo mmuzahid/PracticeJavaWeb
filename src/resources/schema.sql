@@ -7,3 +7,11 @@ CREATE TABLE `post` (
 	`created_at` DATETIME NOT NULL
 )
 ENGINE=InnoDB;
+
+
+CREATE TABLE `tag` (
+	`RECORD_ID` int(10) unsigned NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `post_id` mediumint(11),
+  `tag_name` varchar(100) NOT NULL
+) 
+ENGINE=InnoDB;

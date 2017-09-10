@@ -14,7 +14,12 @@ public class PostDaoImp extends HibernateDaoSupport implements PostDao {
 
 	@Override
 	public Long savePost(Post post) {
-		return (Long) getHibernateTemplate().save(post);
+		if (post.getId() == null) {
+			post.setId((Long) getHibernateTemplate().save(post));
+		} else {
+			getHibernateTemplate().update(post);
+		}
+		return post.getId();
 	}
 
 	@Override
