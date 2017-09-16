@@ -19,5 +19,11 @@ public class RootService {
 		post.setId(savedId);
 		return post;
 	}
+	public Post getPost(Long id) {
+		return postDao.getPostByID(id);
+	}
+	public void deletePost(Post post) {
+		postDao.deletePostByID(post);
+	}
 	
 }

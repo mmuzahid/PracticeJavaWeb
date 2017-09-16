@@ -8,8 +8,7 @@ import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 public class PostDaoImp extends HibernateDaoSupport implements PostDao {
 	@Override
 	public Post getPostByID(Long id) {
-		//TODO implementation
-		return null;
+		return getHibernateTemplate().get(Post.class, id);
 	}
 
 	@Override
@@ -18,14 +17,16 @@ public class PostDaoImp extends HibernateDaoSupport implements PostDao {
 			post.setId((Long) getHibernateTemplate().save(post));
 		} else {
 			getHibernateTemplate().update(post);
+			// alternate option is merge(): Copy the state of the given object onto the persistent object
+			// with the same identifier.
+			// getHibernateTemplate().merge(post);
 		}
 		return post.getId();
 	}
 
 	@Override
-	public boolean deletePostByID(Long id) {
-		//TODO implementation
-		return false;
+	public void deletePostByID(Post post) {
+		getHibernateTemplate().delete(post);
 	}
 
 	@Override
@@ -33,5 +34,4 @@ public class PostDaoImp extends HibernateDaoSupport implements PostDao {
 		//TODO implementation
 		return null;
 	}
-
 }

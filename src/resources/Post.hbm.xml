@@ -11,9 +11,9 @@
 		<property name="title" column="title" />
 		<property name="content" column="content" />
 		<property name="createdAt" column="created_at" />
-		<set name="tags" table="tag" cascade="all-delete-orphan"  inverse="false" >
+		<set name="tags" cascade="all-delete-orphan" inverse="false" lazy="false" ><!-- inverse="false" because relationship will be maintained by Posts -->
 	        <key>
-	            <column name="post_id" not-null="true" />
+	            <column name="post_id"  not-null="true"/>
 	        </key>
 	        <one-to-many class="org.my.models.Tag" />
 	    </set>

@@ -9,9 +9,7 @@
             <column name="RECORD_ID" />
             <generator class="identity" />
         </id>
-		<many-to-one name="post" class="org.my.models.Post">
-			<column name="post_id" not-null="true"></column>
-		</many-to-one>
+		<many-to-one name="post" class="org.my.models.Post" column="post_id"></many-to-one>
 		<property name="tagName" column="tag_name" />
 		
 	</class>

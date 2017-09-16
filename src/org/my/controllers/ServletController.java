@@ -7,6 +7,7 @@ import org.my.models.Tag;
 import org.my.services.RootService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -26,30 +27,50 @@ public class ServletController {
 	@ResponseBody
 	public String createPost() {
 		Post post = new Post();
-		// for update uncomment this: post.setId(32l);
-		post.setTitle("Test Title2");
-		post.setContent("Test Content2");
+		post.setTitle("Test Title");
+		post.setContent("Test Content");
 		post.setCreatedAt(new Date());
 		
 		Tag tag = new Tag();
 		tag.setPost(post);
-		tag.setTagName("JAVA100");
-		
-		Tag ctag = new Tag();
-		ctag.setPost(post);
-		ctag.setTagName("C100");
-		
-		Tag ptag = new Tag();
-		ptag.setPost(post);
-		ptag.setTagName("PYTHON100");
-		
-		
+		tag.setTagName("JAVA");
+
 		post.getTags().add(tag);
-		post.getTags().add(ctag);
-		post.getTags().add(ptag);
-				
+		
+		tag = new Tag();
+		tag.setPost(post);
+		tag.setTagName(".NET");
+
+		post.getTags().add(tag);
+		
 		rootService.savePost(post);
 	    return "saved post id: " + post.getId();
+	}
+	
+	@RequestMapping(value= "/editpost/{id}", method = RequestMethod.GET)
+	@ResponseBody
+	public String editPost(@PathVariable Long id) {
+		Post post =  rootService.getPost(id);
+		post.setTitle("New Title");
+		post.setContent("New Content");
+		
+		Tag tag = new Tag();
+		tag.setPost(post);
+		tag.setTagName("PYTHON");		
+		
+		post.getTags().clear();
+		post.getTags().add(tag);
+
+		rootService.savePost(post);
+	    return "updated post id: " + post.getId();
+	}
+	
+	@RequestMapping(value= "/deletepost/{id}", method = RequestMethod.GET)
+	@ResponseBody
+	public String deletePost(@PathVariable Long id) {
+		Post post =  rootService.getPost(id);
+		rootService.deletePost(post);
+	    return "deleted post id: " + post.getId();
 	}
 	
 }
