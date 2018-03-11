@@ -8,7 +8,7 @@ public class Post {
 	private Long id;
 	private String title;
 	private String content;
-	private Date createdAt;
+	private Date createdAt = new Date();
 	
 	private Set<Tag> tags = new TreeSet<Tag>();
 	

@@ -28,7 +28,7 @@
 		</init-param>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
-		<servlet>
+	<servlet>
 		<servlet-name>another-servlet-dispatcher</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
 		<init-param>
@@ -37,12 +37,29 @@
 		</init-param>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
+	<servlet>
+		<servlet-name>post-dispatcher-servlet</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>WEB-INF/post-dispatcher-servlet.xml</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	
 	<servlet-mapping>
 		<servlet-name>servlet-dispatcher</servlet-name>
 		<url-pattern>/web/*</url-pattern>
 	</servlet-mapping>
-		<servlet-mapping>
+	<servlet-mapping>
 		<servlet-name>another-servlet-dispatcher</servlet-name>
 		<url-pattern>/api/*</url-pattern>
 	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>post-dispatcher-servlet</servlet-name>
+		<url-pattern>/post/*</url-pattern>
+	</servlet-mapping>
+	
+	
+	
 </web-app>

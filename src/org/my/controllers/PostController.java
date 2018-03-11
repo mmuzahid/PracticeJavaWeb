@@ -1,0 +1,88 @@
+package org.my.controllers;
+
+import java.util.List;
+
+import org.my.models.Post;
+import org.my.services.RootService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
+
+@Controller
+public class PostController {
+	private static final String POST_FORM_JSP = "/WEB-INF/jsp/post_form.jsp";
+	private static final String POST_LIST_JSP = "/WEB-INF/jsp/post_list.jsp";
+	@Autowired
+	RootService rootService;
+
+	@RequestMapping(value = "/servletaction", method = RequestMethod.GET)
+	@ResponseBody
+	public String servletaction() {
+		return "PostController: rootServiceData - " + rootService.getData();
+	}
+
+	@RequestMapping(value = "*", method = RequestMethod.GET)
+	@ResponseBody
+	public RedirectView defaultAction() {
+		return new RedirectView("list");
+	}
+
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	@ResponseBody
+	public ModelAndView listPost() {
+		List<Post> allPosts = rootService.getAllPost();
+		ModelAndView listVIew = getPostListView();
+		listVIew.getModel().put("posts", allPosts);
+
+		return listVIew;
+	}
+
+	@RequestMapping(value = "/new", method = RequestMethod.GET)
+	@ResponseBody
+	public ModelAndView newPost() {
+		return getPostFormView();
+	}
+
+	@RequestMapping(value = "/edit", method = RequestMethod.GET)
+	@ResponseBody
+	public ModelAndView editPost(@RequestParam Long id) {
+		Post post = rootService.getPost(id);
+		ModelAndView formView = getPostFormView();
+		formView.getModel().put("post", post);
+		return formView;
+	}
+
+	@RequestMapping(value = "/save", method = RequestMethod.POST)
+	@ResponseBody
+	public RedirectView savePost(@ModelAttribute("post") Post post) {
+		rootService.savePost(post);
+		return new RedirectView("list");
+	}
+
+	@RequestMapping(value = "/delete", method = RequestMethod.GET)
+	@ResponseBody
+	public RedirectView deletePost(@RequestParam Long id) {
+		Post post = rootService.getPost(id);
+		rootService.deletePost(post);
+		return new RedirectView("list");
+	}
+
+	private ModelAndView getPostListView() {
+		ModelAndView model = new ModelAndView();
+		model.setViewName(POST_LIST_JSP);
+		return model;
+	}
+
+	private ModelAndView getPostFormView() {
+		ModelAndView model = new ModelAndView();
+		model.setViewName(POST_FORM_JSP);
+		return model;
+	}
+
+}

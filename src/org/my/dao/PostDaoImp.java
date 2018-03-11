@@ -31,7 +31,6 @@ public class PostDaoImp extends HibernateDaoSupport implements PostDao {
 
 	@Override
 	public List<Post> getAllPost() {
-		//TODO implementation
-		return null;
+		return getHibernateTemplate().find("from Post");
 	}
 }
