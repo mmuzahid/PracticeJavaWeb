@@ -1,6 +1,9 @@
 package org.my.models;
 
+import java.beans.Transient;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -43,4 +46,13 @@ public class Post {
 		this.tags = tags;
 	}
 
+	@Transient
+	public List<String> getTagNames() {
+		List<String> tagNames= new ArrayList<>();
+		for (Tag tag : tags) {
+			tagNames.add(tag.getTagName());
+		}
+		return tagNames;
+	}
+	
 }

@@ -1,8 +1,11 @@
 package org.my.controllers;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.my.models.Post;
+import org.my.models.Tag;
 import org.my.services.RootService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -60,7 +63,10 @@ public class PostController {
 
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
 	@ResponseBody
-	public RedirectView savePost(@ModelAttribute("post") Post post) {
+	public RedirectView savePost(
+			@ModelAttribute("post") Post post,
+			@RequestParam(value = "tagStrings[]", required = false) List<String> tags) {
+		setTags(post, tags);
 		rootService.savePost(post);
 		return new RedirectView("list");
 	}
@@ -85,4 +91,18 @@ public class PostController {
 		return model;
 	}
 
+	public void setTags(Post post, List<String> tagNames) {
+		Set<Tag> tags = new HashSet<Tag>();
+		if (null != tagNames) {
+			for (String tagName : tagNames) {
+				Tag tag = new Tag();
+				tag.setPost(post);
+				tag.setTagName(tagName);
+				tags.add(tag);
+			}
+		}
+		
+		post.setTags(tags);
+	}
+	
 }
