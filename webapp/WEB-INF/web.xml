@@ -60,6 +60,11 @@
 		<url-pattern>/post/*</url-pattern>
 	</servlet-mapping>
 	
-	
+	<jsp-config>
+		<taglib>
+			<taglib-uri>custom-tags</taglib-uri>
+			<taglib-location>taglibs/custom.tld</taglib-location>
+		</taglib>
+	</jsp-config>
 	
 </web-app>
