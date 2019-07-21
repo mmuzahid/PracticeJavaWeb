@@ -9,6 +9,7 @@
 <title>Post Form</title>
 </head>
 <body>
+	 <a href="${pageContext.request.contextPath}">Go Home</a>	
 	<form method="post" action="save">
 		<label for="title">Title:</label><input name="title" type="text" value="${post.title}"/>
 		<label for="content">Content:</label><textarea name="content">${post.content}</textarea>

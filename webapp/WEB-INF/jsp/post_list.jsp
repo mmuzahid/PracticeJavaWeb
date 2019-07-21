@@ -9,7 +9,7 @@
 <title>Posts</title>
 </head>
 <body>
-	<a href="new">Add</a>	
+	 <a href="${pageContext.request.contextPath}">Go Home</a> | <a href="new">+ New Post</a>
 	<c:forEach var="post" items="${posts}">
         <div>
         	${post.title} (created at ${post.createdAt})
