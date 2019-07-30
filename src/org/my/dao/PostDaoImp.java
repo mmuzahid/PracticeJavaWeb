@@ -3,8 +3,13 @@ package org.my.dao;
 import java.util.List;
 
 import org.my.models.Post;
-import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
+import org.springframework.orm.hibernate5.support.HibernateDaoSupport;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
 
+@org.springframework.transaction.annotation.Transactional(propagation = Propagation.REQUIRED,
+isolation = Isolation.DEFAULT,
+readOnly = false)
 public class PostDaoImp extends HibernateDaoSupport implements PostDao {
 	@Override
 	public Post getPostByID(Long id) {
@@ -31,6 +36,6 @@ public class PostDaoImp extends HibernateDaoSupport implements PostDao {
 
 	@Override
 	public List<Post> getAllPost() {
-		return getHibernateTemplate().find("from Post");
+		return (List<Post>) getHibernateTemplate().find("from Post");
 	}
 }

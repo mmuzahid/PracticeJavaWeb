@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app id="WebApp_ID" version="2.4"
-	xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+	xmlns:jsp="http://java.sun.com/xml/ns/javaee/jsp"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+	version="3.1">
+
 	<display-name>PracticeJavaWeb</display-name>
 	<welcome-file-list>
 		<welcome-file>index.html</welcome-file>
@@ -46,7 +49,7 @@
 		</init-param>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
-	
+
 	<servlet-mapping>
 		<servlet-name>servlet-dispatcher</servlet-name>
 		<url-pattern>/web/*</url-pattern>
@@ -59,12 +62,12 @@
 		<servlet-name>post-dispatcher-servlet</servlet-name>
 		<url-pattern>/post/*</url-pattern>
 	</servlet-mapping>
-	
+
 	<jsp-config>
 		<taglib>
 			<taglib-uri>custom-tags</taglib-uri>
 			<taglib-location>taglibs/custom.tld</taglib-location>
 		</taglib>
 	</jsp-config>
-	
+
 </web-app>
