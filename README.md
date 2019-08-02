@@ -2,8 +2,8 @@
 Practice Java Web Frameworks e.g. Spring, Hibernate etc
 
 ### Setup Environment and Run Application ###
-- Install Java 1.7
-- Install Tomcat 5.5
+- Install Java 1.8
+- Install Tomcat 8.5
 - Install MySQL 5
 - Configure Database in daos.xml
 - Install Maven 3
