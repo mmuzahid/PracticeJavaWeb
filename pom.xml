@@ -10,10 +10,10 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<java-version>1.6</java-version>
-		<org.springframework-version>3.2.13.RELEASE</org.springframework-version>
-		<org.slf4j-version>1.5.10</org.slf4j-version>
-		<mysql-connector-java-version>5.1.6</mysql-connector-java-version>
+		<java.version>1.8</java.version>
+		<org.springframework-version>5.1.8.RELEASE</org.springframework-version>
+		<hibernate.framework.version>5.4.3.Final</hibernate.framework.version>
+		<mysql.connector.version>5.1.6</mysql.connector.version>
 	</properties>
 
 
@@ -23,15 +23,16 @@
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
-			<version>${mysql-connector-java-version}</version>
+			<version>${mysql.connector.version}</version>
 		</dependency>
 	
 		<!-- Hibernate -->
 		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate</artifactId>
-			<version>3.2.2.ga</version>
+		    <groupId>org.hibernate</groupId>
+		    <artifactId>hibernate-core</artifactId>
+		    <version>${hibernate.framework.version}</version>
 		</dependency>
+		
 		<dependency>
 			<groupId>javax.transaction</groupId>
 			<artifactId>jta</artifactId>
@@ -77,8 +78,8 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.1</version>
 				<configuration>
-					<source>1.7</source>
-					<target>1.7</target>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
 				</configuration>
 			</plugin>
 			<plugin>
