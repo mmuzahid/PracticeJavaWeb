@@ -7,6 +7,8 @@ import java.util.Set;
 import org.my.models.Post;
 import org.my.models.Tag;
 import org.my.services.RootService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -20,6 +22,7 @@ import org.springframework.web.servlet.view.RedirectView;
 @Controller
 public class PostController {
 
+	private static Logger logger = LoggerFactory.getLogger(PostController.class);
 	private static final String POST_FORM_JSP = "/WEB-INF/jsp/post_form.jsp";
 	private static final String POST_LIST_JSP = "/WEB-INF/jsp/post_list.jsp";
 	@Autowired
@@ -69,6 +72,7 @@ public class PostController {
 			@RequestParam(value = "tagStrings[]", required = false) List<String> tags) {
 		setTags(post, tags);
 		rootService.savePost(post);
+		logger.info(String.format("post saved. id: %s", post.getId()));
 		return new RedirectView("list");
 	}
 
@@ -77,6 +81,7 @@ public class PostController {
 	public RedirectView deletePost(@RequestParam Long id) {
 		Post post = rootService.getPost(id);
 		rootService.deletePost(post);
+		logger.info(String.format("post deleted. id: %s", post.getId()));
 		return new RedirectView("list");
 	}
 
