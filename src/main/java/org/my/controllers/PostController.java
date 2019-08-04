@@ -19,6 +19,7 @@ import org.springframework.web.servlet.view.RedirectView;
 
 @Controller
 public class PostController {
+
 	private static final String POST_FORM_JSP = "/WEB-INF/jsp/post_form.jsp";
 	private static final String POST_LIST_JSP = "/WEB-INF/jsp/post_list.jsp";
 	@Autowired

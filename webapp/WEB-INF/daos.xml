@@ -22,8 +22,8 @@
 		<property name="dataSource" ref="dataSource" />
 		<property name="mappingResources">
 			<list>
-				<value>resources/Post.hbm.xml</value>				
-				<value>resources/Tag.hbm.xml</value>				
+				<value>hibernate-resources/Post.hbm.xml</value>				
+				<value>hibernate-resources/Tag.hbm.xml</value>				
 			</list>
 		</property>
 		<property name="hibernateProperties">
