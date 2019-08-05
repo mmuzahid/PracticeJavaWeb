@@ -11,9 +11,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -28,19 +28,19 @@ public class PostController {
 	@Autowired
 	RootService rootService;
 
-	@RequestMapping(value = "/servletaction", method = RequestMethod.GET)
+	@GetMapping(value = "/servletaction")
 	@ResponseBody
 	public String servletaction() {
 		return "PostController: rootServiceData - " + rootService.getData();
 	}
 
-	@RequestMapping(value = "*", method = RequestMethod.GET)
+	@GetMapping(value = "*")
 	@ResponseBody
 	public RedirectView defaultAction() {
 		return new RedirectView("list");
 	}
 
-	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	@GetMapping(value = "/list")
 	@ResponseBody
 	public ModelAndView listPost() {
 		List<Post> allPosts = rootService.getAllPost();
@@ -50,13 +50,13 @@ public class PostController {
 		return listVIew;
 	}
 
-	@RequestMapping(value = "/new", method = RequestMethod.GET)
+	@GetMapping(value = "/new")
 	@ResponseBody
 	public ModelAndView newPost() {
 		return getPostFormView();
 	}
 
-	@RequestMapping(value = "/edit", method = RequestMethod.GET)
+	@GetMapping(value = "/edit")
 	@ResponseBody
 	public ModelAndView editPost(@RequestParam Long id) {
 		Post post = rootService.getPost(id);
@@ -65,7 +65,7 @@ public class PostController {
 		return formView;
 	}
 
-	@RequestMapping(value = "/save", method = RequestMethod.POST)
+	@PostMapping(value = "/save")
 	@ResponseBody
 	public RedirectView savePost(
 			@ModelAttribute("post") Post post,
@@ -76,7 +76,7 @@ public class PostController {
 		return new RedirectView("list");
 	}
 
-	@RequestMapping(value = "/delete", method = RequestMethod.GET)
+	@GetMapping(value = "/delete")
 	@ResponseBody
 	public RedirectView deletePost(@RequestParam Long id) {
 		Post post = rootService.getPost(id);
@@ -98,7 +98,7 @@ public class PostController {
 	}
 
 	public void setTags(Post post, List<String> tagNames) {
-		Set<Tag> tags = new HashSet<Tag>();
+		Set<Tag> tags = new HashSet<>();
 		if (null != tagNames) {
 			for (String tagName : tagNames) {
 				Tag tag = new Tag();

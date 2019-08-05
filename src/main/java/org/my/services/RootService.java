@@ -13,7 +13,7 @@ public class RootService {
 		this.postDao = postDao;
 	}
 	public String getData() {
-		return "RootService";
+		return "RootService - " + this.toString();
 	}
 	
 	public Post savePost(Post post) {

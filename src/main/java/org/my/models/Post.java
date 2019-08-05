@@ -13,7 +13,7 @@ public class Post {
 	private String content;
 	private Date createdAt = new Date();
 	
-	private Set<Tag> tags = new TreeSet<Tag>();
+	private Set<Tag> tags = new TreeSet<>();
 	
 	public Long getId() {
 		return id;

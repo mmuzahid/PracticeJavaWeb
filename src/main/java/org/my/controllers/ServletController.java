@@ -7,9 +7,8 @@ import org.my.models.Tag;
 import org.my.services.RootService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
@@ -17,13 +16,13 @@ public class ServletController {
 	@Autowired
 	RootService rootService;
 	
-	@RequestMapping(value= "/servletaction", method = RequestMethod.GET)
+	@GetMapping(value= "/servletaction")
 	@ResponseBody
 	public String servletaction() {
 	    return "ServletController Response! service data: " + rootService.getData();
 	}
 	
-	@RequestMapping(value= "/createpost", method = RequestMethod.GET)
+	@GetMapping(value= "/createpost")
 	@ResponseBody
 	public String createPost() {
 		Post post = new Post();
@@ -47,7 +46,7 @@ public class ServletController {
 	    return "saved post id: " + post.getId();
 	}
 	
-	@RequestMapping(value= "/editpost/{id}", method = RequestMethod.GET)
+	@GetMapping(value= "/editpost/{id}")
 	@ResponseBody
 	public String editPost(@PathVariable Long id) {
 		Post post =  rootService.getPost(id);
@@ -65,7 +64,7 @@ public class ServletController {
 	    return "updated post id: " + post.getId();
 	}
 	
-	@RequestMapping(value= "/deletepost/{id}", method = RequestMethod.GET)
+	@GetMapping(value= "/deletepost/{id}")
 	@ResponseBody
 	public String deletePost(@PathVariable Long id) {
 		Post post =  rootService.getPost(id);
