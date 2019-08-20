@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="app_fn" uri="custom-tags" %>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -9,7 +10,11 @@
 <title>Post Form</title>
 </head>
 <body>
-	 <a href="${pageContext.request.contextPath}">Go Home</a>	
+	<a href="${pageContext.request.contextPath}">Go Home</a>	
+	<security:authorize access="isAuthenticated()">
+	    logged in as <security:authentication property="principal.username" />
+	    <a href="${pageContext.request.contextPath}/logout">Logout</a>
+	</security:authorize>
 	<form method="post" action="save">
 		<label for="title">Title:</label><input name="title" type="text" value="${post.title}"/>
 		<label for="content">Content:</label><textarea name="content">${post.content}</textarea>
@@ -21,6 +26,7 @@
 		 </select>
 		
 		<input type="hidden" name="id" value="${post.id}" />
+		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 		<button type="submit">Save</button>
 	</form>
 </body>

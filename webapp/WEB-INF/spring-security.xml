@@ -9,8 +9,16 @@
 
 	<http />
 
-	<user-service>
-		<user name="user" password="password" authorities="ROLE_USER" />
-	</user-service>
+	<authentication-manager>
+		<authentication-provider>
+			<user-service>
+				<user name="admin" password="$2a$10$ZUP4uuhml.dq55ho3sHRzu0c54o.ZZ42a5JsBYAQxM8KvhVCnfcp2"
+					authorities="ROLE_USER, ROLE_ADMIN" />
+				<user name="user" password="$2a$10$S.aOSrkcZmJLqaXEhzauyew94b7lzdRAVCtGe69p2Psoi3P9O1Tcu"
+					authorities="ROLE_USER" />
+			</user-service>
+			<password-encoder hash="bcrypt" />
+		</authentication-provider>
+	</authentication-manager>
 
 </b:beans>
