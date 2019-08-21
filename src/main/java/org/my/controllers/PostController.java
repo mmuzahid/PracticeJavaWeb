@@ -10,6 +10,7 @@ import org.my.services.RootService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -34,12 +35,14 @@ public class PostController {
 		return "PostController: rootServiceData - " + rootService.getData();
 	}
 
+	@PreAuthorize("hasRole('ROLE_USER')")
 	@GetMapping(value = "*")
 	@ResponseBody
 	public RedirectView defaultAction() {
 		return new RedirectView("list");
 	}
 
+	@PreAuthorize("hasRole('ROLE_USER')")
 	@GetMapping(value = "/list")
 	@ResponseBody
 	public ModelAndView listPost() {
@@ -50,12 +53,14 @@ public class PostController {
 		return listVIew;
 	}
 
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@GetMapping(value = "/new")
 	@ResponseBody
 	public ModelAndView newPost() {
 		return getPostFormView();
 	}
 
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@GetMapping(value = "/edit")
 	@ResponseBody
 	public ModelAndView editPost(@RequestParam Long id) {
@@ -64,7 +69,8 @@ public class PostController {
 		formView.getModel().put("post", post);
 		return formView;
 	}
-
+	
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@PostMapping(value = "/save")
 	@ResponseBody
 	public RedirectView savePost(
@@ -76,6 +82,7 @@ public class PostController {
 		return new RedirectView("list");
 	}
 
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@GetMapping(value = "/delete")
 	@ResponseBody
 	public RedirectView deletePost(@RequestParam Long id) {
