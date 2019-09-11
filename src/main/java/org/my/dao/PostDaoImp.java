@@ -2,15 +2,22 @@ package org.my.dao;
 
 import java.util.List;
 
+import org.hibernate.SessionFactory;
 import org.my.models.Post;
 import org.springframework.orm.hibernate5.support.HibernateDaoSupport;
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
-@org.springframework.transaction.annotation.Transactional(propagation = Propagation.REQUIRED,
-isolation = Isolation.DEFAULT,
-readOnly = false)
+@Repository
+@Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.DEFAULT, readOnly = false)
 public class PostDaoImp extends HibernateDaoSupport implements PostDao {
+	
+	public PostDaoImp(SessionFactory sessionfactory){
+	    setSessionFactory(sessionfactory);
+	}
+	
 	@Override
 	public Post getPostByID(Long id) {
 		return getHibernateTemplate().get(Post.class, id);

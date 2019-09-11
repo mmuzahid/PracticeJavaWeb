@@ -6,7 +6,7 @@ import java.util.Set;
 
 import org.my.models.Post;
 import org.my.models.Tag;
-import org.my.services.RootService;
+import org.my.services.PostService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,13 +27,7 @@ public class PostController {
 	private static final String POST_FORM_JSP = "/WEB-INF/jsp/post_form.jsp";
 	private static final String POST_LIST_JSP = "/WEB-INF/jsp/post_list.jsp";
 	@Autowired
-	RootService rootService;
-
-	@GetMapping(value = "/servletaction")
-	@ResponseBody
-	public String servletaction() {
-		return "PostController: rootServiceData - " + rootService.getData();
-	}
+	PostService postService;
 
 	@PreAuthorize("hasRole('ROLE_USER')")
 	@GetMapping(value = "*")
@@ -46,7 +40,7 @@ public class PostController {
 	@GetMapping(value = "/list")
 	@ResponseBody
 	public ModelAndView listPost() {
-		List<Post> allPosts = rootService.getAllPost();
+		List<Post> allPosts = postService.getAllPost();
 		ModelAndView listVIew = getPostListView();
 		listVIew.getModel().put("posts", allPosts);
 
@@ -64,7 +58,7 @@ public class PostController {
 	@GetMapping(value = "/edit")
 	@ResponseBody
 	public ModelAndView editPost(@RequestParam Long id) {
-		Post post = rootService.getPost(id);
+		Post post = postService.getPost(id);
 		ModelAndView formView = getPostFormView();
 		formView.getModel().put("post", post);
 		return formView;
@@ -77,7 +71,7 @@ public class PostController {
 			@ModelAttribute("post") Post post,
 			@RequestParam(value = "tagStrings[]", required = false) List<String> tags) {
 		setTags(post, tags);
-		rootService.savePost(post);
+		postService.savePost(post);
 		logger.info(String.format("post saved. id: %s", post.getId()));
 		return new RedirectView("list");
 	}
@@ -86,8 +80,8 @@ public class PostController {
 	@GetMapping(value = "/delete")
 	@ResponseBody
 	public RedirectView deletePost(@RequestParam Long id) {
-		Post post = rootService.getPost(id);
-		rootService.deletePost(post);
+		Post post = postService.getPost(id);
+		postService.deletePost(post);
 		logger.info(String.format("post deleted. id: %s", post.getId()));
 		return new RedirectView("list");
 	}
