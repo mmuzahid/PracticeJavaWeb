@@ -109,7 +109,11 @@
 				<version>3.1</version>
 				<configuration>
 					<source>${java.version}</source>
-					<target>${java.version}</target>
+					<target>${java.version}</target>		
+					<!-- Use command like that if not configure fork, executable option here: mvn -Dmaven.compiler.fork=true -Dmaven.compiler.executable="%JAVA_1_8_HOME%\bin\javac" clean package -->			
+	                <fork>true</fork>
+	                <executable>${JAVA_1_8_HOME}\bin\javac</executable>
+	                <compilerVersion>${java.version}</compilerVersion>
 				</configuration>
 			</plugin>
 			<plugin>
