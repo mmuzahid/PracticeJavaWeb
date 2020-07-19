@@ -12,9 +12,10 @@
 	<authentication-manager>
 		<authentication-provider>
 			<user-service>
-				<user name="admin" password="$2a$10$ZUP4uuhml.dq55ho3sHRzu0c54o.ZZ42a5JsBYAQxM8KvhVCnfcp2"
+				<!-- password generated from https://bcrypt-generator.com -->
+				<user name="admin" password="$2y$10$7gH/WsxH7r8gIi82LHqrnebVut2BmeGLZzg3YExfFV69w0FxMoOGC"
 					authorities="ROLE_USER, ROLE_ADMIN" />
-				<user name="user" password="$2a$10$S.aOSrkcZmJLqaXEhzauyew94b7lzdRAVCtGe69p2Psoi3P9O1Tcu"
+				<user name="user" password="$2y$10$7gH/WsxH7r8gIi82LHqrnebVut2BmeGLZzg3YExfFV69w0FxMoOGC"
 					authorities="ROLE_USER" />
 			</user-service>
 			<password-encoder hash="bcrypt" />
