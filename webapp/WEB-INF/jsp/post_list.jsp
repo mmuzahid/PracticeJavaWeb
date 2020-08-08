@@ -18,16 +18,33 @@
 	    logged in as <security:authentication property="principal.username" />
 	    <a href="${pageContext.request.contextPath}/logout">Logout</a>
 	</security:authorize>
+	<table class="table">
+		<tr>
+			<th>Title</th>
+			<th>Created At</th>
+			<th>Content</th>
+			<th>Tags</th>
+			<th>Actions</th>
+		</tr>
 	<c:forEach var="post" items="${posts}">
-        <div>
-        	${post.title} (created at ${post.createdAt})
-        	<a href="edit?id=${post.id}">Edit</a> |
-        	<a onclick="return confirm('Do you want to delete this Post?');" href="delete?id=${post.id}">Delete</a>
-        </div>
-        <div>
-        	<pre>${post.content}</pre>
-        </div>
+		<tr>
+			<td>${post.title}</td>
+			<td>${post.createdAt}</td>
+			<td>${post.content}</td>
+			<td>
+				<c:forEach var="tag" items="${post.tags}" varStatus = "status">
+			        <c:out value="${tag.tagName}"></c:out>
+			        <c:if test="${!status.last}">,</c:if>
+			    </c:forEach>				
+			</td>
+			<td>
+			    <a href="edit?id=${post.id}">Edit</a> |
+        		<a onclick="return confirm('Do you want to delete this Post?');" href="delete?id=${post.id}">Delete</a>
+			</td>
+		</tr>
     </c:forEach>
+    </table>
+    
     
 </body>
 </html>
