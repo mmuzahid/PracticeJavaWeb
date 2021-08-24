@@ -1,5 +1,7 @@
 CREATE DATABASE practicejavaweb;
 
+USE  practicejavaweb;
+
 CREATE TABLE `post` (
 	`id` INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	`title` VARCHAR(50) NOT NULL,

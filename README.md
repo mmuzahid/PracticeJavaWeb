@@ -14,7 +14,7 @@ Practice Java Web Frameworks e.g. Spring, Hibernate etc
 		
 			` mvn -Dmaven.compiler.fork=true -Dmaven.compiler.executable="%JAVA_1_8_HOME%\bin\javac" clean package `
 	
-  ii. Put following tags inside <configuration> of maven-compiler-plugin
+  ii. Put following tags inside <configuration> of maven-compiler-plugin (in pom.xml)
 	
 				<fork>true</fork>
             <executable>${JAVA_1_8_HOME}\bin\javac</executable>
